@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FixIt — Community Problem Solver</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">F</div>
+        <span>Fix<span>It</span></span>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <button class="nav-item active" data-section="dashboard">
+            <span>⌂</span>
+            Dashboard
+        </button>
+
+        <button class="nav-item" data-section="report">
+            <span>＋</span>
+            Report Problem
+        </button>
+
+        <button class="nav-item" data-section="problems">
+            <span>▣</span>
+            My Problems
+        </button>
+
+        <button class="nav-item" data-section="community">
+            <span>♧</span>
+            Community
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="help-card">
+            <div class="help-icon">?</div>
+
+            <div>
+                <strong>Need help?</strong>
+                <p>Learn how FixIt works.</p>
+            </div>
+        </div>
+
+        <button class="nav-item" id="themeToggle">
+            <span id="themeIcon">☾</span>
+            Dark Mode
+        </button>
+
+        <a class="nav-item" href="admin.html" style="text-decoration: none;" title="Open Admin Panel">
+            <span>⚙</span>
+            Admin Panel
+        </a>
+
+        <button class="nav-item" id="logoutButton">
+            <span>↪</span>
+            Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <button class="mobile-menu" id="mobileMenu">
+            ☰
+        </button>
+
+        <div class="topbar-title">
+            <span class="eyebrow">COMMUNITY PLATFORM</span>
+            <h1 id="pageTitle">Dashboard</h1>
+        </div>
+
+        <div class="topbar-actions">
+
+            <button class="icon-button" id="notificationButton">
+                ♢
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="user-profile">
+                <div class="avatar" id="userAvatar">JD</div>
+
+                <div class="user-info">
+                    <strong id="userName">John Doe</strong>
+                    <span>Resident</span>
+                </div>
+
+                <span class="chevron">⌄</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
+    <div class="content">
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================= -->
+
+        <section class="page-section active" id="dashboard">
+
+            <div class="welcome-row">
+
+                <div>
+                    <h2>Good morning, <span id="welcomeName">John</span> 👋</h2>
+                    <p>Let's make your community a better place.</p>
+                </div>
+
+                <button class="primary-btn" id="reportButton">
+                    <span>＋</span>
+                    Report a Problem
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Total Reports</span>
+                        <div class="stat-icon blue">▣</div>
+                    </div>
+
+                    <strong class="stat-number" id="totalReports">0</strong>
+
+                    <span class="stat-change positive">
+                        ↑ All reports
+                    </span>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Pending</span>
+                        <div class="stat-icon orange">◷</div>
+                    </div>
+
+                    <strong class="stat-number" id="pendingReports">0</strong>
+
+                    <span class="stat-change">
+                        Waiting for action
+                    </span>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">In Progress</span>
+                        <div class="stat-icon purple">↻</div>
+                    </div>
+
+                    <strong class="stat-number" id="progressReports">0</strong>
+
+                    <span class="stat-change">
+                        Currently being solved
+                    </span>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Resolved</span>
+                        <div class="stat-icon green">✓</div>
+                    </div>
+
+                    <strong class="stat-number" id="resolvedReports">0</strong>
+
+                    <span class="stat-change positive">
+                        ✓ Successfully solved
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- RECENT REPORTS -->
+
+                <div class="panel recent-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Recent Reports</h3>
+                            <p>Your latest community reports</p>
+                        </div>
+
+                        <button class="text-button" data-section-target="problems">
+                            View all →
+                        </button>
+
+                    </div>
+
+                    <div id="recentReports" class="reports-list">
+                        <!-- JS will insert reports -->
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Common things you can do</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <button class="quick-action" data-action="report">
+                            <div class="quick-icon blue">＋</div>
+                            <div>
+                                <strong>Report an Issue</strong>
+                                <span>Tell us about a problem</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+
+                        <button class="quick-action" data-action="problems">
+                            <div class="quick-icon purple">◷</div>
+                            <div>
+                                <strong>Track a Report</strong>
+                                <span>Check your report status</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+
+                        <button class="quick-action" data-action="community">
+                            <div class="quick-icon green">♧</div>
+                            <div>
+                                <strong>Join Community</strong>
+                                <span>See what others reported</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HOW IT WORKS -->
+
+            <div class="how-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">SIMPLE PROCESS</span>
+                        <h2>How FixIt works</h2>
+                    </div>
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step">
+                        <div class="step-number">01</div>
+                        <div>
+                            <h3>Spot a problem</h3>
+                            <p>Notice something that needs attention in your community.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="step-line"></div>
+
+
+                    <div class="step">
+                        <div class="step-number">02</div>
+                        <div>
+                            <h3>Report it</h3>
+                            <p>Give us the details and location of the issue.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="step-line"></div>
+
+
+                    <div class="step">
+                        <div class="step-number">03</div>
+                        <div>
+                            <h3>Track progress</h3>
+                            <p>Follow the status until the problem is resolved.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REPORT PAGE
+        ========================= -->
+
+        <section class="page-section" id="report">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">MAKE A DIFFERENCE</span>
+                    <h2>Report a Problem</h2>
+                    <p>Help improve your community by reporting an issue.</p>
+                </div>
+            </div>
+
+
+            <div class="form-panel">
+
+                <form id="reportForm">
+
+                    <div class="form-section-title">
+                        <div class="form-number">01</div>
+
+                        <div>
+                            <h3>Problem details</h3>
+                            <p>Tell us what needs to be fixed.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+                            <label for="problemTitle">
+                                Problem title
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="problemTitle"
+                                placeholder="e.g. Street light not working"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category
+                                <span>*</span>
+                            </label>
+
+                            <select id="category" required>
+
+                                <option value="">Select category</option>
+                                <option value="Roads">Roads & Potholes</option>
+                                <option value="Street Light">Street Lights</option>
+                                <option value="Water">Water & Leakage</option>
+                                <option value="Garbage">Garbage & Cleanliness</option>
+                                <option value="Traffic">Traffic & Signals</option>
+                                <option value="Public Space">Public Spaces</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="priority">
+                                Priority
+                                <span>*</span>
+                            </label>
+
+                            <select id="priority" required>
+
+                                <option value="">Select priority</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="location">
+                                Location
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                placeholder="e.g. Near Main Road, Sector 4"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="description">
+                                Description
+                                <span>*</span>
+                            </label>
+
+                            <textarea
+                                id="description"
+                                rows="5"
+                                placeholder="Describe the problem in detail..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">02</div>
+
+                        <div>
+                            <h3>Additional information</h3>
+                            <p>Optional information that can help us.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+
+                            <label>
+                                Photo
+                            </label>
+
+                            <label class="upload-box" for="photo">
+
+                                <div class="upload-icon">↑</div>
+
+                                <strong>Upload a photo</strong>
+
+                                <span>
+                                    PNG, JPG or JPEG up to 5MB
+                                </span>
+
+                                <input
+                                    type="file"
+                                    id="photo"
+                                    accept="image/*"
+                                    hidden
+                                >
+
+                            </label>
+
+                            <div id="fileName" class="file-name"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="cancelReport"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+                            Submit Report
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MY PROBLEMS
+        ========================= -->
+
+        <section class="page-section" id="problems">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">YOUR ACTIVITY</span>
+                    <h2>My Problems</h2>
+                    <p>Track every problem you've reported.</p>
+                </div>
+
+                <button class="primary-btn" id="reportButton2">
+                    ＋ Report Problem
+                </button>
+
+            </div>
+
+
+            <div class="filter-bar">
+
+                <div class="search-box">
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search your reports..."
+                    >
+                </div>
+
+
+                <select id="statusFilter">
+
+                    <option value="All">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Rejected">Rejected</option>
+
+                </select>
+
+
+                <select id="categoryFilter">
+
+                    <option value="All">All Categories</option>
+                    <option value="Roads">Roads</option>
+                    <option value="Street Light">Street Light</option>
+                    <option value="Water">Water</option>
+                    <option value="Garbage">Garbage</option>
+                    <option value="Traffic">Traffic</option>
+                    <option value="Public Space">Public Space</option>
+                    <option value="Other">Other</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="problems-table-panel">
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Problem</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="problemsTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="emptyState" class="empty-state">
+
+                    <div class="empty-icon">⌕</div>
+
+                    <h3>No reports found</h3>
+
+                    <p>Try changing your search or filters.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COMMUNITY
+        ========================= -->
+
+        <section class="page-section" id="community">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">TOGETHER WE CAN</span>
+                    <h2>Community</h2>
+                    <p>See problems being reported around the community.</p>
+                </div>
+
+            </div>
+
+
+            <div class="community-stats">
+
+                <div class="community-stat">
+                    <span>Community Reports</span>
+                    <strong id="communityTotal">0</strong>
+                </div>
+
+                <div class="community-stat">
+                    <span>Resolved This Month</span>
+                    <strong id="communityResolved">0</strong>
+                </div>
+
+                <div class="community-stat">
+                    <span>People Helping</span>
+                    <strong>248</strong>
+                </div>
+
+            </div>
+
+
+            <div class="community-grid" id="communityGrid">
+                <!-- JS generated -->
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     REPORT DETAILS MODAL
+========================= -->
+
+<div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+        <button class="modal-close" id="modalClose">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div id="toast" class="toast">
+
+    <div class="toast-icon">✓</div>
+
+    <div>
+        <strong id="toastTitle">Success</strong>
+        <p id="toastMessage">Done successfully.</p>
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

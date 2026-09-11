@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixIt — Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="auth-shell">
+    <div class="auth-brand">
+        <div class="brand-icon">F</div>
+        <span>Fix<span>It</span></span>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-header">
+            <span class="eyebrow">COMMUNITY PLATFORM</span>
+            <h1 id="authTitle">Welcome back</h1>
+            <p id="authSubtitle">Login to report and track community problems.</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="tab active" id="loginTab">Login</button>
+            <button class="tab" id="registerTab">Create account</button>
+        </div>
+
+        <form id="loginForm">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+            <button class="auth-btn" type="submit">Login <span>→</span></button>
+        </form>
+
+        <form id="registerForm" class="hidden">
+            <label>Full name</label>
+            <input type="text" id="registerName" placeholder="Your full name" required>
+
+            <label>Email</label>
+            <input type="email" id="registerEmail" placeholder="you@example.com" required>
+
+            <label>Password</label>
+            <input type="password" id="registerPassword" placeholder="Minimum 6 characters" minlength="6" required>
+
+            <label>Confirm password</label>
+            <input type="password" id="confirmPassword" placeholder="Repeat your password" minlength="6" required>
+
+            <button class="auth-btn" type="submit">Create account <span>→</span></button>
+        </form>
+
+        <div id="authMessage" class="auth-message"></div>
+
+        <div class="demo-box" id="demoUserBox" style="cursor: pointer;" title="Click to autofill user credentials">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong>Demo user account</strong>
+                <span style="font-size: 10px; color: var(--primary); font-weight: 600;">Click to fill ↵</span>
+            </div>
+            <span>Email: john@fixit.com</span>
+            <span>Password: 123456</span>
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border);">
+                <strong>Demo admin account</strong>
+                <span>Email: admin@fixit.com</span>
+                <span>Password: admin123</span>
+            </div>
+        </div>
+
+        <p class="admin-link">
+            Are you an administrator?
+            <a href="admin.html">Open Admin Panel →</a>
+        </p>
+    </div>
+
+    <p class="footer-note">© 2026 FixIt • Community Problem Solver</p>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

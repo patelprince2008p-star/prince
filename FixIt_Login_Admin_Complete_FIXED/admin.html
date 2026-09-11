@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixIt Admin — Control Center</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<aside class="admin-sidebar">
+    <div class="admin-logo">
+        <div class="logo-icon">F</div>
+        <div><strong>Fix<span>It</span></strong><small>ADMIN</small></div>
+    </div>
+
+    <nav>
+        <button class="admin-nav active" data-page="dashboard">⌂ Dashboard</button>
+        <button class="admin-nav" data-page="reports">▣ Reports</button>
+    </nav>
+
+    <div class="admin-bottom">
+        <div class="admin-user">
+            <div class="admin-avatar">AD</div>
+            <div><strong>Administrator</strong><span>FixIt Control Center</span></div>
+        </div>
+        <button id="adminLogout" class="logout">↪ Logout</button>
+    </div>
+</aside>
+
+<main class="admin-main">
+
+    <header class="admin-topbar">
+        <div>
+            <span class="eyebrow">FIXIT CONTROL CENTER</span>
+            <h1 id="pageTitle">Admin Dashboard</h1>
+        </div>
+        <a class="back-link" href="index.html">← User Website</a>
+    </header>
+
+    <div class="admin-content">
+
+        <section id="dashboard" class="admin-page active">
+            <div class="heading">
+                <div>
+                    <span class="eyebrow">OVERVIEW</span>
+                    <h2>Good morning, Admin 👋</h2>
+                    <p>Review community reports and move approved issues toward resolution.</p>
+                </div>
+                <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat"><span>Total Reports</span><strong id="totalCount">0</strong></div>
+                <div class="stat pending"><span>Pending Review</span><strong id="pendingCount">0</strong></div>
+                <div class="stat approved"><span>Approved</span><strong id="approvedCount">0</strong></div>
+                <div class="stat progress"><span>In Progress</span><strong id="progressCount">0</strong></div>
+                <div class="stat resolved"><span>Resolved</span><strong id="resolvedCount">0</strong></div>
+                <div class="stat rejected"><span>Rejected</span><strong id="rejectedCount">0</strong></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <div><h3>Reports waiting for review</h3><p>Approve or reject new community reports.</p></div>
+                    <button class="link-btn" data-go="reports">View all →</button>
+                </div>
+                <div id="pendingList" class="mini-list"></div>
+            </div>
+        </section>
+
+        <section id="reports" class="admin-page">
+            <div class="heading">
+                <div>
+                    <span class="eyebrow">REPORT MANAGEMENT</span>
+                    <h2>All Community Reports</h2>
+                    <p>Review every report and update its progress.</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <input id="searchReports" type="search" placeholder="Search title, location or reporter...">
+                <select id="statusFilter">
+                    <option value="All">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Roads">Roads</option>
+                    <option value="Street Light">Street Light</option>
+                    <option value="Water">Water</option>
+                    <option value="Garbage">Garbage</option>
+                    <option value="Traffic">Traffic</option>
+                    <option value="Public Space">Public Space</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="panel table-panel">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Problem</th>
+                                <th>Reporter</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTable"></tbody>
+                    </table>
+                </div>
+                <div id="emptyReports" class="empty hidden">No reports match your filters.</div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<div class="modal-backdrop hidden" id="adminLoginModal">
+    <div class="admin-modal" style="width: min(100%, 420px); text-align: left;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <div class="logo-icon">F</div>
+            <div>
+                <strong style="font-size: 20px;">Fix<span>It</span></strong>
+                <small style="display: block; color: var(--muted); font-size: 9px; letter-spacing: 1px;">CONTROL CENTER</small>
+            </div>
+        </div>
+        <span class="eyebrow">ADMINISTRATOR ACCESS</span>
+        <h2 style="font-size: 22px; margin: 6px 0 8px;">Admin Login</h2>
+        <p style="color: var(--muted); font-size: 12px; margin-bottom: 18px;">Enter administrator credentials to manage community reports.</p>
+
+        <form id="adminLoginForm" style="display: flex; flex-direction: column; gap: 12px;">
+            <div>
+                <label style="display: block; font-size: 11px; font-weight: 700; margin-bottom: 5px;">Admin Email</label>
+                <input type="email" id="adminEmail" placeholder="admin@fixit.com" required style="width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: 9px; font-size: 12px;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 11px; font-weight: 700; margin-bottom: 5px;">Admin Password</label>
+                <input type="password" id="adminPassword" placeholder="••••••••" required style="width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: 9px; font-size: 12px;">
+            </div>
+
+            <div id="adminLoginError" style="color: var(--danger); font-size: 11px; font-weight: 600; min-height: 16px;"></div>
+
+            <button type="submit" style="border: 0; background: var(--primary); color: #fff; padding: 12px; border-radius: 9px; font-weight: 700; cursor: pointer;">
+                Login to Control Center →
+            </button>
+        </form>
+
+        <div id="demoAdminBox" style="margin-top: 16px; padding: 12px; background: var(--soft); border: 1px dashed var(--border); border-radius: 9px; font-size: 11px; color: var(--muted); cursor: pointer;" title="Click to autofill admin credentials">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="color: var(--text);">Demo Admin Credentials</strong>
+                <span style="color: var(--primary); font-weight: 700; font-size: 10px;">Click to fill ↵</span>
+            </div>
+            <span>Email: admin@fixit.com</span><br>
+            <span>Password: admin123</span>
+        </div>
+
+        <div style="margin-top: 18px; text-align: center;">
+            <a href="index.html" style="color: var(--muted); font-size: 11px; text-decoration: none;">← Return to User Website</a>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="admin-modal">
+        <button class="modal-close" id="modalClose">×</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>
